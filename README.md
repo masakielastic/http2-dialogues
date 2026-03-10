@@ -19,7 +19,7 @@ Explains how HTTP/2 concepts appear in real implementations and libraries.
 **Architect**  
 Explains the protocol design and architectural reasoning behind HTTP/2.
 
-This structure helps connect three perspectives:
+This structure connects three perspectives:
 
 - what developers are confused about
 - how implementations actually work
@@ -27,24 +27,45 @@ This structure helps connect three perspectives:
 
 ## Purpose
 
-This repository aims to help programmers understand HTTP/2 from a practical and architectural perspective.
+This repository aims to help programmers understand HTTP/2 from both a **practical** and **architectural** perspective.
 
-Topics will include concepts such as:
+Instead of only describing the protocol specification, the articles focus on how developers interact with HTTP/2 through software libraries and real implementations.
 
-- HTTP/2 connections
-- frames and streams
-- multiplexing
-- flow control
-- event-driven APIs
+## Learning Path
+
+The materials in this repository will gradually cover the following topics.
+
+### Foundations
+
+- Why HTTP/2 exists
+- HTTP/1 limitations
+- HTTP/2 connection model
+
+### Core Protocol Concepts
+
+- Frames
+- Streams
+- Stream state machine
+- Multiplexing
+- Flow control
+
+### Programming with HTTP/2
+
+- Event-driven APIs
 - HTTP/2 library design
-- implementation concepts
+- Stream lifecycle in code
+- Implementing HTTP/2 clients and servers
 
-The focus is not only on the protocol itself, but also on how programmers interact with HTTP/2 through software libraries.
+### Implementation Insights
+
+- How HTTP/2 libraries expose protocol events
+- Observing HTTP/2 traffic
+- Understanding frame logs
 
 ## Status
 
 This repository is currently under development.  
-More articles will be added over time.
+New articles will be added over time.
 
 ## License
 
