@@ -6,19 +6,19 @@
 
 The word `stream` appears in many different contexts in programming.
 
-We talk about byte streams in files and sockets.
-In Domain-Driven Design, we see event streams and event sourcing.
+We talk about **byte streams** in files and sockets.
+In Domain-Driven Design, we see **event streams** and **event sourcing**.
 In HTTP/2, we see the term `stream` again.
 
 The problem is that the same English word is used in all of these places, but it does not always mean exactly the same thing.
 
-Sometimes a stream means that something is flowing over time.
-Sometimes it means a logical channel where communication happens.
+Sometimes a stream means that **something is flowing over time**.
+Sometimes it means a **logical channel where communication happens**.
 
 This article explains the idea step by step by separating:
 
-- the shared abstraction
-- the context-specific meaning
+- the **shared abstraction**
+- the **context-specific meaning**
 
 The goal is to build a clean mental model before studying topics like Domain Events, Event Sourcing, or HTTP/2 event-driven APIs.
 
@@ -69,8 +69,8 @@ It is a useful introduction, but only a partial one.
 **Engineer:**
 For example:
 
-- a bucket of water is like data that already exists in full
-- a river is like data arriving gradually
+- a **bucket of water** is like data that already exists in full
+- a **river** is like data arriving gradually
 
 That helps beginners see why the word flow is used.
 
@@ -88,10 +88,10 @@ Because water is too vague for programming. A water metaphor does not clearly ex
 **Engineer:**
 For programming, other metaphors are often better depending on the situation:
 
-- an unrolling scroll
-- a conveyor belt
-- an electronic ticker display
-- a live log feed
+- an **unrolling scroll**
+- a **conveyor belt**
+- an **electronic ticker display**
+- a **live log feed**
 
 **Learner:**
 So the water metaphor is good for "things keep coming," but not for the detailed behavior?
@@ -105,7 +105,7 @@ Exactly. Good teaching often uses multiple metaphors, not just one.
 What is a byte stream, then?
 
 **Engineer:**
-A byte stream is a stream where what flows is raw bytes.
+A byte stream is a stream where what flows is **raw bytes**.
 
 Typical examples are:
 
@@ -149,15 +149,15 @@ Exactly.
 Then what is an event stream?
 
 **Architect:**
-An event stream is a stream where what flows is not raw bytes, but events.
+An event stream is a stream where what flows is not raw bytes, but **events**.
 
 **Engineer:**
 Each event is already a meaningful unit. Instead of reading anonymous bytes, you receive something like:
 
-- UserLoggedIn
-- FileDownloaded
-- PaymentCompleted
-- HeadersReceived
+- `UserLoggedIn`
+- `FileDownloaded`
+- `PaymentCompleted`
+- `HeadersReceived`
 
 **Learner:**
 So unlike a byte stream, an event stream already has boundaries?
@@ -192,9 +192,9 @@ Domain events come from Domain-Driven Design. They represent meaningful events i
 **Engineer:**
 Examples include:
 
-- OrderPlaced
-- PaymentCompleted
-- ShipmentDispatched
+- `OrderPlaced`
+- `PaymentCompleted`
+- `ShipmentDispatched`
 
 These are not just implementation details. They describe something important that happened in the business model.
 
@@ -207,9 +207,9 @@ Correct. It describes something the business cares about.
 **Engineer:**
 This gives us a useful contrast:
 
-- Byte stream -> flow of raw data
-- Protocol event stream -> flow of communication-level events
-- Domain event stream -> flow of business-level events
+- `Byte stream` -> flow of raw data
+- `Protocol event stream` -> flow of communication-level events
+- `Domain event stream` -> flow of business-level events
 
 **Learner:**
 So even when people say "event stream," I still have to ask what kind of events they mean.
@@ -227,11 +227,11 @@ HTTP/2 libraries often expose protocol activity as structured events.
 
 For example:
 
-- HeadersReceived
-- DataReceived
-- StreamClosed
-- StreamReset
-- SettingsReceived
+- `HeadersReceived`
+- `DataReceived`
+- `StreamClosed`
+- `StreamReset`
+- `SettingsReceived`
 
 Instead of making the user read raw bytes directly, the library parses the protocol and reports meaningful protocol-level occurrences.
 
@@ -245,8 +245,8 @@ Yes. That is one of the main values of an event-driven API.
 Notice that these are not domain events.
 They are protocol events.
 
-PaymentCompleted is a business event.
-HeadersReceived is a protocol event.
+`PaymentCompleted` is a business event.
+`HeadersReceived` is a protocol event.
 
 **Learner:**
 So the same general pattern exists, but the level of meaning is different.
@@ -260,9 +260,9 @@ Exactly. The abstraction is similar, but the semantic layer is different.
 This is where I get the most confused. In HTTP/2, what exactly is a stream?
 
 **Engineer:**
-In general programming, a stream often means something flowing sequentially over time.
+In general programming, a stream often means **something flowing sequentially over time**.
 
-But in HTTP/2, a stream means something more specific:
+But in HTTP/2, a **stream** means something more specific:
 
 - a logical communication channel inside a connection
 
@@ -281,10 +281,10 @@ Right. It is not the thing flowing. It is the logical lane where communication h
 **Architect:**
 A useful metaphor is a highway:
 
-- Connection = the whole highway
-- Stream = an individual lane
-- Frames = vehicles moving in lanes
-- Events = notifications such as "lane 3 closed" or "lane 5 received cargo"
+- **Connection** = the whole highway
+- **Stream** = an individual lane
+- **Frames** = vehicles moving in lanes
+- **Events** = notifications such as "lane 3 closed" or "lane 5 received cargo"
 
 **Learner:**
 That helps a lot. The stream is more like the lane than the traffic itself.
@@ -295,9 +295,9 @@ Exactly.
 **Architect:**
 Another good metaphor is a chat system:
 
-- Connection = your active connection to the chat server
-- Stream = one conversation thread
-- Event = something that happened in that thread
+- **Connection** = your active connection to the chat server
+- **Stream** = one conversation thread
+- **Event** = something that happened in that thread
 
 **Learner:**
 So an HTTP/2 stream is a context for communication, not the abstract idea of "flowing bytes" by itself.
@@ -313,21 +313,21 @@ Then what is the difference between a stream and an event?
 **Engineer:**
 A simple way to remember it is:
 
-- Stream = where something happens
-- Event = what happened
+- **Stream** = where something happens
+- **Event** = what happened
 
 **Architect:**
 Or:
 
-- Stream = context
-- Event = occurrence
+- **Stream** = context
+- **Event** = occurrence
 
 **Engineer:**
 In HTTP/2, these examples make the distinction concrete:
 
-- HeadersReceived on stream 3
-- DataReceived on stream 3
-- StreamClosed for stream 3
+- `HeadersReceived` on stream 3
+- `DataReceived` on stream 3
+- `StreamClosed` for stream 3
 
 The stream gives the location or scope.
 The event tells you the occurrence.
@@ -405,24 +405,24 @@ Yes. The confusion usually comes from seeing all uses of the word `stream` at th
 
 ## Concept Summary
 
-A stream is, at the most general level, an abstraction in which something arrives sequentially over time. The key ideas are sequence, partial arrival, and the possibility of processing before the whole input is available.
+A **stream** is, at the most general level, an abstraction in which something arrives sequentially over time. The key ideas are sequence, partial arrival, and the possibility of processing before the whole input is available.
 
-A byte stream is the low-level case. What flows is raw bytes. Files, sockets, and standard input are typical examples. In TCP, this is especially important because TCP provides a continuous sequence of bytes, not message boundaries. Applications must define their own framing rules on top of that byte stream.
+A **byte stream** is the low-level case. What flows is raw bytes. Files, sockets, and standard input are typical examples. In TCP, this is especially important because TCP provides a continuous sequence of bytes, not message boundaries. Applications must define their own framing rules on top of that byte stream.
 
-An event stream is a higher-level structure. What flows is not raw bytes, but meaningful events. Each item already represents something interpretable, such as a notification, a log entry, or a protocol occurrence.
+An **event stream** is a higher-level structure. What flows is not raw bytes, but meaningful events. Each item already represents something interpretable, such as a notification, a log entry, or a protocol occurrence.
 
-A domain event stream is a specific kind of event stream used in business-oriented modeling. Events such as OrderPlaced or PaymentCompleted describe meaningful changes in the domain, rather than technical communication details.
+A **domain event stream** is a specific kind of event stream used in business-oriented modeling. Events such as `OrderPlaced` or `PaymentCompleted` describe meaningful changes in the domain, rather than technical communication details.
 
-In HTTP/2 libraries, events such as HeadersReceived, DataReceived, or StreamClosed are protocol events. They describe things happening inside the protocol, not the business domain.
+In **HTTP/2 libraries**, events such as HeadersReceived, DataReceived, or StreamClosed are protocol events. They describe things happening inside the protocol, not the business domain.
 
 The most important distinction is this:
 
-- In the general sense, a stream is something flowing over time.
-- In HTTP/2, a stream is a logical communication channel inside a connection.
+- In the **general sense**, a stream is something flowing over time.
+- In **HTTP/2**, a stream is a logical communication channel inside a connection.
 
 That means an HTTP/2 stream is not the thing that flows. It is the place where protocol communication occurs. Frames move through that context, and events describe what happened there.
 
-Understanding this separation makes later topics much easier: domain events, event sourcing, HTTP/2 event APIs, and event class hierarchies such as StreamEvent and ConnectionEvent all become easier to reason about once the word `stream` is no longer overloaded in your mind.
+Understanding this separation makes later topics much easier: domain events, event sourcing, HTTP/2 event APIs, and event class hierarchies such as `StreamEvent` and `ConnectionEvent` all become easier to reason about once the word `stream` is no longer overloaded in your mind.
 
 ## Key Takeaways
 
@@ -434,5 +434,5 @@ Understanding this separation makes later topics much easier: domain events, eve
 - Domain events are business-level events, not just technical signals.
 - HTTP/2 library events are protocol-level events.
 - In HTTP/2, a stream is a logical communication channel inside a connection.
-- Stream means where communication happens; event means what happened.
+- Stream means **where communication happens**; event means **what happened**.
 - This mental model is a useful foundation for studying event sourcing, DDD, and HTTP/2 event-driven API design.
